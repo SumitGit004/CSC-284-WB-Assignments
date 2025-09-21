@@ -1,2 +1,2 @@
 # CSC-284-WB-Assignments
-This contains the assignments, projects, code examples from Advanced C++/OOP class
+This contains the assignments, projects, code examples from my Advanced C++/OOP class of Fall 2025.
