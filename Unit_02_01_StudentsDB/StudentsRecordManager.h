@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 
+//StudentsRecordManager keeps a record of students
+//provides functionality to add student, search student and display students.
 class StudentsRecordManager{
     private:
     std::vector<Student> record;

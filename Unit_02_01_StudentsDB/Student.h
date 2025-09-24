@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-
+// Define a student class to model a student.
 class Student{
 
     private:

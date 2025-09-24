@@ -1,3 +1,5 @@
+//User interface to interact with StudentsRecordManager object to manaage student records.
+
 #include <print>
 #include <iostream>
 #include <format>
@@ -53,7 +55,7 @@ int main()
 
   return 0;
 }
-
+// displays menu of choices and return the user choice.
 int displayMenu()
 {
 
@@ -76,6 +78,7 @@ int displayMenu()
     return choice;
 }
 
+//gets students details from user and returns a student object
 Student getStudentDetails()
 {
     int id, age;
@@ -100,6 +103,7 @@ Student getStudentDetails()
     return Student(id, name, age, major, email);
 }
 
+// Gets positive numeric value from user
 int getPositiveNumber()
 {
     int number;
@@ -115,6 +119,7 @@ int getPositiveNumber()
     return number;
 }
 
+//displays all students of a student record manager in a tabular format 
 void displayAllStudents(StudentsRecordManager &recordManager)
 {
 
@@ -143,6 +148,7 @@ void displayAllStudents(StudentsRecordManager &recordManager)
     }
 }
 
+//Displays the count of students for each major in the student record manager
 void showStudentCountByMajor(StudentsRecordManager &recordManager)
 {
     const map<string, int> &majorCount = recordManager.countMajor();
@@ -160,7 +166,7 @@ void showStudentCountByMajor(StudentsRecordManager &recordManager)
         }
     }
 }
-
+//prints students details and takes a const student  object reference as a parameter
 void printStudentDetails(const Student &student)
 {
     println("\nID: {} Name: {} Age: {} Major: {} Email: {}",
@@ -180,6 +186,7 @@ void DisplayStudentById(StudentsRecordManager &recordManager){
             println("\nStudent with ID {} not found.", id);
 }
 
+//dispay students with the user specified name
 void DisplayStudentByName(StudentsRecordManager &recordManager){
         
         string name;
