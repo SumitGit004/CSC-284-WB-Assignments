@@ -17,13 +17,13 @@ int main() {
      // assigning dynamically allocated char array of size 15 in each iteration of inifinte loop
     rawCharArrayPointer = new char[size]{};
   
-     
+    // use smart pointer instead of raw pointers to handle memory allocation and deallocation
     // smartCharArrayPointer  = make_unique<char []>(size);
 
      println("{} bytes of memory allocated\n", size);
      
      
-     //commenting the below line to demonstrate memory leak.
+     //comment the below line to demonstrate memory leak.
     delete[] rawCharArrayPointer;
      }
    
