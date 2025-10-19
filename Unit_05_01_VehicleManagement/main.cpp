@@ -23,8 +23,6 @@ int main() {
     fleet.addVehicle(new Car("Honda", "Civic", 2010, 87000, 2, false));
     std::print("\n2010 Honda Civic has been added to the fleet.\n");
 
-
-
     std::print("\n--Fleet Vehicles--\n\n");
 
     fleet.displayAllVehicles();
