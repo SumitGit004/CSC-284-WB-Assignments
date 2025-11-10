@@ -9,7 +9,6 @@ namespace fs = std::filesystem;//create an alias for shorter name
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <log_directory>\n";
-        std::cout << "Crap";
         return 1;
     }
 
