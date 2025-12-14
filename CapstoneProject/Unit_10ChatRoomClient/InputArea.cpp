@@ -12,35 +12,60 @@ InputArea::InputArea(int height, int width, int start_y, int start_x):
 
     window.setBorder(0, 0, 0, 0, 0, 0, 0, 0);
 
-
-    window.print(1, 1, "> ");
+    int middleY = height/2;
+    window.print(middleY, 1, "> ");
 
 
     wrefresh(window.getWindow());
 }
 
-std::string InputArea::getUserInput() {
+void InputArea::handleKey(int key) {
+  
+  if(key == KEY_BACKSPACE || key == 127 || key == '\b'){
+    if(!buffer.empty())
+     buffer.pop_back();
+  }
+  else if(key >=32 && key<= 126)//check if the key is printable
+     buffer.push_back(static_cast<char>(key));
 
+  redraw();
+
+}
+
+WINDOW* InputArea::getWindow(){
+  return window.getWindow();
+}
+
+void InputArea::redraw(){
+    
     WINDOW* win = window.getWindow();
-    char userInput[60];
-    
-    nocbreak(); //enable line buffering
-    echo();
-    
-    mvwgetnstr(win,1, 3, userInput, 59);
-
-    noecho();
-    cbreak();
 
     int height, width;
     getmaxyx(win, height, width);
-    mvwhline(win, 1, 3, ' ', width - 5);
 
-    // Move cursor back to input start
-    wmove(win, 1, 3);
-    inputString = std::string(userInput);
+    int middleY = height/2,
+       inputX = 3;
 
-    return inputString;
+   // clears previous input line;
+    mvwhline(win, middleY, inputX,' ', width - inputX - 1);
+
+    //draw the text in the buffer
+    mvwprintw(win, middleY, inputX, "%s", buffer.c_str());
+
+    wmove(win, middleY, buffer.length() + inputX);
+    
+    wrefresh(win);
 }
 
+
+std::string InputArea::retrieveBuffer(){
+   
+  std::string temp = buffer;
+
+  buffer.clear();
+
+  redraw();
+
+  return temp;
+}
 

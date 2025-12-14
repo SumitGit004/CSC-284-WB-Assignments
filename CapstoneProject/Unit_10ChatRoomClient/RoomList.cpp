@@ -20,8 +20,8 @@ void RoomList::displayRoom(){
    
     WINDOW* win_ptr = window.getWindow();
 
-    werase(win_ptr);        
-    window.setBorder(0,0,0,0,0,0,0,0);
+    // werase(win_ptr);        
+    // window.setBorder(0,0,0,0,0,0,0,0);
     
      for(int i = 0; i < rooms.size(); i++) {
             
@@ -41,7 +41,12 @@ void RoomList::handleInputKey(int key)
     if (key == KEY_UP){
       selected = (selected == 0 ? rooms.size() - 1 : selected - 1);
     }
-    else if (key == KEY_DOWN){
+    else 
         selected = (selected == rooms.size() - 1 ? 0 : selected + 1);
-    }
+
+    displayRoom();
+}
+
+WINDOW* RoomList::getWindow(){
+    return window.getWindow();
 }

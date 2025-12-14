@@ -65,11 +65,51 @@ ChatClientUI::ChatClientUI() : parentWindow(LINES, COLS, 0,0){
 }
 
 void ChatClientUI::run(){
-    
-    keypad(parentWindow.getWindow(), TRUE);
+
+    noecho();
+    cbreak();
+    nodelay(stdscr, TRUE);// input functions return immediately without waiting for 
+                          // input;
+    keypad(stdscr, TRUE);
+
+    int ch;
+    std::string message;
+
+    auto roomWindow = roomList.get();
+    auto inputWindow = inputArea.get();
 
     while(true){
-        int ch = wgetch(parentWindow.getWindow());
+      ch = getch();
+
+      if(ch == ERR){
+       napms(10);//err represents no input
+       continue;
+      }
+      else if(ch == KEY_UP || ch == KEY_DOWN)
+        roomWindow->handleInputKey(ch);
+
+      else if(ch == '\n')
+        message = inputWindow->retrieveBuffer();
+
+      else
+      inputWindow->handleKey(ch);
+    }
+}
+
+ /*auto inputWindow =  inputArea.get()->getWindow();
+    keypad(inputWindow, TRUE);
+    
+     while(true){
+      inputArea.get() -> getUserInput();
+     } */
+   /*
+     auto roomWindow =  roomList.get()->getWindow();
+    keypad(roomWindow, TRUE);
+    
+    noecho();
+    while(true){
+         
+        int ch = wgetch(roomWindow);
 
         if(ch == KEY_UP || ch == KEY_DOWN){
             roomList->handleInputKey(ch);
@@ -77,5 +117,6 @@ void ChatClientUI::run(){
         }
 
     }
+    */
 
-}
+    

@@ -38,5 +38,9 @@ int TitleBar::getCenterPos() {
     wrefresh(window.getWindow());
  }
 
+ WINDOW* TitleBar::getWindow() {
+    window.getWindow();
+ }
+
 
     

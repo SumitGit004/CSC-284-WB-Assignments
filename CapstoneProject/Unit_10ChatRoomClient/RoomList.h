@@ -20,4 +20,6 @@ class RoomList{
     void handleInputKey(int key);
 
     const std::vector<std::string>&  getRooms() const;
+
+    WINDOW* getWindow();
 };

@@ -12,6 +12,11 @@ class TitleBar{
     std::string title;
     int getCenterPos();
     public:
+
     TitleBar(int height, int width, int position_y,int  position_x, const std::string & title);
+
     void setTitle(const std::string& title);
+
+    WINDOW* getWindow();
+
 };
