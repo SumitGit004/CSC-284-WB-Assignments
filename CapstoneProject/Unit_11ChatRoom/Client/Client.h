@@ -39,6 +39,8 @@ class Client{
 
     void receiveMessage();
 
+    bool isRunning();
+
     void disconnect();
 
 };

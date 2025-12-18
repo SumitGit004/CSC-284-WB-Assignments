@@ -89,7 +89,7 @@ void ChatClientUI::run(const std::string& ip, int port){
     auto inputAreaWindow = inputArea.get();
     auto messageAreaWindow = messageArea.get();
     
-    while(true){
+    while(client.isRunning()){
      int ch = wgetch(parentWin);
 
       if(ch != ERR){
@@ -117,8 +117,13 @@ void ChatClientUI::run(const std::string& ip, int port){
     }
     napms(10);
 }
-
 client.disconnect();
+
+messageAreaWindow->displayMessage("\n!!DISCONNECTED FROM SERVER!!.");
+
+
+getch();
+
 endwin();
 }
 

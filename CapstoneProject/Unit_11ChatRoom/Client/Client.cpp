@@ -18,13 +18,13 @@
         return false;
         }
       
-       running = true;
+       running.store(true);
 
        return true;
     }
 
     void Client::sendMessage(const std::string& input){
-        if(running)
+        if(running.load())
         send(sock, input.c_str(), input.size(), 0);
     }
 
@@ -37,7 +37,7 @@
         
         char buffer[4096];
         
-        while (running){
+        while (running.load()){
         memset(buffer, 0, 4096);
         int bytesReceived = recv(sock, buffer, 4096, 0);
 
@@ -46,21 +46,25 @@
              onMessage(std::string(buffer, bytesReceived));
         }
         else{
-            running = false;
+            running.store(false);
         break;
         }
     }
-        
+  }
 
-    }
+   bool Client::isRunning(){
+        return running.load();
+   }
 
     void Client::disconnect() {
-            
-        running = false;
+        
+    
+        running.store(false);
         shutdown(sock, SHUT_RDWR);//stop sending / receving 
-        close(sock);
 
            if (receivingThread.joinable())
             receivingThread.join();
+
+              close(sock);
     }
 
